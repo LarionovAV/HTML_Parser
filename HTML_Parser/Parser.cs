@@ -73,7 +73,12 @@ namespace HTML_Parser
                 if (tableNodes == null)
                     continue;
                 foreach (var tItem in tableNodes) {
-                    parsingResult.Add(tItem.ChildNodes[0].InnerText, tItem.ChildNodes[1].ChildNodes[0].InnerText);
+                    //Переходим на уровень ниже
+                    HtmlDocument lowLevelDocument = web.Load("https://classifikators.ru" + tItem.ChildNodes[1].ChildNodes[0].Attributes["href"].Value);
+                    var lowTableNodes = lowLevelDocument.DocumentNode.SelectNodes(".//*[@class = 'container']/div[@class = 'row']/div/table[@class='table table-hover table-bordered']/tbody/tr");
+                    foreach (var lowTabItem in lowTableNodes){
+                        parsingResult.Add(lowTabItem.ChildNodes[0].InnerText, lowTabItem.ChildNodes[1].ChildNodes[0].InnerText);
+                    }
                 }
                 returnItem.Add(profLevels[i - 1], parsingResult);
             }
