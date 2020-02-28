@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.1000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTML_Parser", "HTML_Parser\HTML_Parser.csproj", "{F40CDCBF-B3F8-4804-9082-B5B2B955D707}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserWorkChecker", "ParserWorkChecker\ParserWorkChecker.csproj", "{EDD57A2A-F25A-4D34-BC41-64D835B6E1F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{F40CDCBF-B3F8-4804-9082-B5B2B955D707}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F40CDCBF-B3F8-4804-9082-B5B2B955D707}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F40CDCBF-B3F8-4804-9082-B5B2B955D707}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDD57A2A-F25A-4D34-BC41-64D835B6E1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD57A2A-F25A-4D34-BC41-64D835B6E1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD57A2A-F25A-4D34-BC41-64D835B6E1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD57A2A-F25A-4D34-BC41-64D835B6E1F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
