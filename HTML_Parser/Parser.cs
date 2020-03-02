@@ -1,7 +1,6 @@
 ﻿using HtmlAgilityPack;
 using System.Collections.Generic;
 using System.Linq;
-
 namespace HTML_Parser
 {
     public class Parser
@@ -97,6 +96,43 @@ namespace HTML_Parser
                 citizenships.Add(tItem.ChildNodes[3].ChildNodes[0].InnerText, tItem.ChildNodes[5].InnerText);
             }
             return citizenships;
+        }
+
+        public Dictionary<string, string> ParseForeignLanguages() {
+            Dictionary<string, string> languages = new Dictionary<string, string>();
+
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument document = web.Load("https://classifikators.ru/okin/04");
+
+            var tableNodes = document.DocumentNode.SelectNodes(".//*[@class = 'table table-hover table-ok']/tbody/tr/td[@class='td-code']");
+            if (tableNodes == null)
+                return languages;
+            int index = 1;
+            foreach (var tItem in tableNodes)
+            {
+                languages.Add((index++).ToString(), tItem.NextSibling.NextSibling.InnerText.Trim());
+            }
+            return languages;
+        }
+
+        public Dictionary<string, string> ParseLanguageKnowlegeLevel() {
+            Dictionary<string, string> levels = new Dictionary<string, string>();
+
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument document = web.Load("https://classifikators.ru/okin/05");
+
+            var tableNodes = document.DocumentNode.SelectNodes(".//*[@class = 'table table-hover table-ok']/tbody/tr/td[@class='td-code']");
+            if (tableNodes == null)
+                return levels;
+            int index = 1;
+            foreach (var tItem in tableNodes)
+            {
+                levels.Add((index++).ToString(), tItem.NextSibling.NextSibling.InnerText.Trim());
+            }
+
+            return levels;
         }
     }
 }

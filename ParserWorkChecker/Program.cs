@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+
 using HTML_Parser;
 namespace ParserWorkChecker
 {
@@ -8,9 +10,9 @@ namespace ParserWorkChecker
     {
         static void Main(string[] args)
         {
-            Display(Parser.GetInstance().ParseProffessions());
+            Display(Parser.GetInstance().ParseForeignLanguages());
+            
         }
-
         static void Display(Dictionary<string, Dictionary<string, string>> outItem) {
             if (outItem.Count == 0) {
                 Console.WriteLine("Данные не получены");
@@ -36,12 +38,17 @@ namespace ParserWorkChecker
                 return;
             }
 
-            foreach (var item in outItem)
+            foreach (var item in outItem.Where(x=>x.Value.Contains("Не")))
             {
                 Console.WriteLine(item.Key + " --> " + item.Value);   
             }
 
             Console.ReadKey();
+        }
+        static void Display(string[] outItem) {
+            foreach (Object obj in outItem) {
+                Console.WriteLine(obj);
+            }
         }
         static void WriteFile(Dictionary<string, Dictionary<string, string>> outItem, string filename) {
             StreamWriter outstream = new StreamWriter(filename);
