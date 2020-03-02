@@ -1,11 +1,6 @@
 ﻿using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HTML_Parser
 {
@@ -38,7 +33,7 @@ namespace HTML_Parser
          *      -VALUE.KEY: код профессии
          *      -VALUE.VALUE: наименование провессии
          */
-        public Dictionary<string, Dictionary<string, string>> ParseProfessions() {
+        public Dictionary<string, Dictionary<string, string>> ParseProffessions() {
 
             string[] profLevels = new string[9];
             //Инициализируем озвращаемый объект
@@ -54,7 +49,7 @@ namespace HTML_Parser
             //Путь проложили до строк
             var tableNodes = document.DocumentNode.SelectNodes(".//*[@class = 'container']/div[@class = 'row']/div/div[@class='tab-content']/div/table[@class='table table-hover table-bordered']/tbody/tr");
             if (tableNodes == null)
-                return null;
+                return returnItem;
             foreach (var tItem in tableNodes) {
                 int i = romeNums.Where(x => x.Value == tItem.ChildNodes[0].InnerText).FirstOrDefault().Key;
                 profLevels[i - 1] = tItem.ChildNodes[1].ChildNodes[0].InnerText;
@@ -85,6 +80,23 @@ namespace HTML_Parser
             
 
             return returnItem;
+        }
+
+        public Dictionary<string, string> ParseCitizenships() {
+            Dictionary<string, string> citizenships = new Dictionary<string, string>();
+
+
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument document = web.Load("https://classifikators.ru/oksm");
+
+            var tableNodes = document.DocumentNode.SelectNodes(".//*[@class = 'table table-condensed table-hover table-ok table-numbered']/tbody/tr");
+            if (tableNodes == null)
+                return citizenships;
+            foreach (var tItem in tableNodes)
+            {
+                citizenships.Add(tItem.ChildNodes[3].ChildNodes[0].InnerText, tItem.ChildNodes[5].InnerText);
+            }
+            return citizenships;
         }
     }
 }

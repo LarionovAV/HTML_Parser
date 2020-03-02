@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using HTML_Parser;
 namespace ParserWorkChecker
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            WriteFile(Parser.GetInstance().ParseProfessions(), "output.txt");
+            Display(Parser.GetInstance().ParseProffessions());
         }
 
         static void Display(Dictionary<string, Dictionary<string, string>> outItem) {
-            if (outItem == null) {
+            if (outItem.Count == 0) {
                 Console.WriteLine("Данные не получены");
                 Console.ReadKey();
                 return;
@@ -30,9 +27,25 @@ namespace ParserWorkChecker
 
             Console.ReadKey();
         }
+        static void Display(Dictionary<string, string> outItem)
+        {
+            if (outItem.Count == 0)
+            {
+                Console.WriteLine("Данные не получены");
+                Console.ReadKey();
+                return;
+            }
+
+            foreach (var item in outItem)
+            {
+                Console.WriteLine(item.Key + " --> " + item.Value);   
+            }
+
+            Console.ReadKey();
+        }
         static void WriteFile(Dictionary<string, Dictionary<string, string>> outItem, string filename) {
             StreamWriter outstream = new StreamWriter(filename);
-            if (outItem == null)
+            if (outItem.Count == 0)
             {
                 outstream.WriteLine("Данные не получены");
                 outstream.Close();
